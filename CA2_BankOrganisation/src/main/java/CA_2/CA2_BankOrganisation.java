@@ -17,6 +17,9 @@ public class CA2_BankOrganisation {
         
         // Create FileHandler object
         FileHandler fileHandler = new FileHandler();
+        
+        //// Create SortService object
+        SortService sortService = new SortService();
 
         // Read employees file
         fileHandler.readFile("src/main/resources/Applicants_Form.txt");
@@ -41,6 +44,12 @@ public class CA2_BankOrganisation {
 
                 case 1:
                     System.out.println("SORT selected"); //Call sorting method
+                    
+                    // Sort employee records
+                    var sortedEmployees = sortService.mergeSort(fileHandler.getEmployeeList());
+                    
+                    //Display first 20 sorted employees
+                    sortService.displayFirst20(sortedEmployees);
                     break;
 
                 case 2:
