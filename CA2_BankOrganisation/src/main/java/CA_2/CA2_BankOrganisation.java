@@ -18,9 +18,12 @@ public class CA2_BankOrganisation {
         // Create FileHandler object
         FileHandler fileHandler = new FileHandler();
         
-        //// Create SortService object
+        // Create SortService object
         SortService sortService = new SortService();
-
+        
+        //Create SearchService Object
+        SearchService searchService = new SearchService();
+        
         // Read employees file
         fileHandler.readFile("src/main/resources/Applicants_Form.txt");
         
@@ -54,6 +57,21 @@ public class CA2_BankOrganisation {
 
                 case 2:
                     System.out.println("SEARCH selected"); //Call searching method
+                    
+                    // Sort employees first
+                    var sortedList = sortService.mergeSort(fileHandler.getEmployeeList());
+                    
+                    // Clear scanner buffer
+                    scanner.nextLine();
+                    
+                    System.out.print("Enter employee full name: ");
+                    String targetName = scanner.nextLine();
+                    
+                    // Perform recursive binary search
+                    Employee foundEmployee = searchService.binarySearch(sortedList,targetName,0,sortedList.size() - 1);
+                    
+                    //Display result
+                    searchService.displayEmployee(foundEmployee);
                     break;
                     
                 case 3:
